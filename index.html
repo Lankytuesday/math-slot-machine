@@ -2,63 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Math Slot Machine — Settings Gear</title>
+  <title>Math Slot Machine — Clean Stable Build</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root{
-      --bg:#0b1321; --panel:#111a2e; --accent:#ffd54a; --text:#e9f1ff; --muted:#9fb0d0;
-      --good:#35d07f; --bad:#ff6b6b; --overlay: rgba(6,10,20,.65);
+      --bg:#0b1321; --panel:#111a2e; --accent:#ffd54a; --text:#e9f1ff; --muted:#9fb0d0; --overlay: rgba(6,10,20,.65);
+      --good:#35d07f; --bad:#ff6b6b;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0; min-height:100svh; display:flex; align-items:center; justify-content:center;
-      background: radial-gradient(1200px 600px at 50% 20%, #152443, var(--bg));
-      color:var(--text); font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
-    .cabinet{ width:min(960px, 94vw); background:linear-gradient(#132446,#0f1b36);
-      border:2px solid #2a3a63; border-radius:20px; box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 0 40px rgba(255,255,255,.03);
-      padding:22px 22px 26px;
-    }
+    body{ margin:0; min-height:100svh; display:flex; align-items:center; justify-content:center; background: radial-gradient(1200px 600px at 50% 20%, #152443, var(--bg)); color:var(--text); font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    .cabinet{ width:min(960px, 94vw); background:linear-gradient(#132446,#0f1b36); border:2px solid #2a3a63; border-radius:20px; box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 0 40px rgba(255,255,255,.03); padding:22px; }
     .header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px }
     .title{ font-weight:800; letter-spacing:.5px; color:var(--accent); text-shadow:0 2px 0 #5a4700; margin:0 }
-
-    .gear-btn{
-      appearance:none; border:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center;
-      width:42px; height:42px; border-radius:10px; background:#14254a; border:1px solid #263a6d; color:#dbe6ff;
-      box-shadow:0 6px 20px rgba(0,0,0,.3);
-    }
+    .gear-btn{ appearance:none; border:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:10px; background:#14254a; border:1px solid #263a6d; color:#dbe6ff; box-shadow:0 6px 20px rgba(0,0,0,.3); }
     .gear-btn svg{ width:22px; height:22px; }
-
-    .window{
-      display:grid; grid-template-columns:1fr auto 1fr; gap:14px;
-      background:var(--panel); border-radius:16px; padding:18px; border:1px solid #23345c;
-      box-shadow:inset 0 0 0 4px #0c1530, inset 0 0 25px rgba(0,0,0,.5);
-    }
-    .reel{ height:120px; border-radius:12px; display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(#0e1936,#0a1227); border:1px solid #22335b; font-size:76px; font-weight:900; line-height:1;
-      position:relative; overflow:hidden; text-shadow:0 3px 0 rgba(0,0,0,.3);
-    }
+    .window{ display:grid; grid-template-columns:1fr auto 1fr; gap:14px; background:var(--panel); border-radius:16px; padding:18px; border:1px solid #23345c; box-shadow:inset 0 0 0 4px #0c1530, inset 0 0 25px rgba(0,0,0,.5); }
+    .reel{ height:120px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:linear-gradient(#0e1936,#0a1227); border:1px solid #22335b; font-size:76px; font-weight:900; line-height:1; position:relative; overflow:hidden; text-shadow:0 3px 0 rgba(0,0,0,.3); }
     .reel.sign{ width:110px; }
     .reel::after{ content:""; position:absolute; inset:0; box-shadow: inset 0 18px 18px rgba(255,255,255,.06), inset 0 -18px 18px rgba(0,0,0,.35); pointer-events:none; }
     .reel span{ display:block; transform:translateZ(0) }
-
     .controls{ margin-top:14px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-
     .lever-wrap{ display:flex; align-items:center; gap:14px; }
     .lever-base{ width:18px; height:74px; background:#2a3a63; border-radius:9px; position:relative; box-shadow:inset 0 -6px 0 rgba(0,0,0,.35); }
-    .lever{ position:absolute; left:50%; bottom:4px; transform-origin:bottom center; width:8px; height:58px; background:#a8b6dc; border-radius:5px;
-      transform:translateX(-50%) rotate(0deg); transition:transform .15s ease; }
-    .knob{ position:absolute; top:-18px; left:50%; transform:translateX(-50%); width:28px; height:28px; background:var(--accent); border-radius:50%;
-      box-shadow:0 2px 0 #5a4700, 0 0 18px rgba(255,213,74,.35); border:2px solid #6b5600; }
+    .lever{ position:absolute; left:50%; bottom:4px; transform-origin:bottom center; width:8px; height:58px; background:#a8b6dc; border-radius:5px; transform:translateX(-50%) rotate(0deg); transition:transform .15s ease; }
+    .knob{ position:absolute; top:-18px; left:50%; transform:translateX(-50%); width:28px; height:28px; background:var(--accent); border-radius:50%; box-shadow:0 2px 0 #5a4700, 0 0 18px rgba(255,213,74,.35); border:2px solid #6b5600; }
     .lever.is-pulled{ transform:translateX(-50%) rotate(28deg) }
-
-    button#pull{ appearance:none; border:none; cursor:pointer; background:linear-gradient(#ffd54a,#ffb300); color:#2a1d00; font-weight:800;
-      padding:14px 18px; border-radius:10px; box-shadow:0 6px 0 #a67c00, 0 14px 24px rgba(0,0,0,.35); font-size:16px; letter-spacing:.3px; }
+    button#pull{ appearance:none; border:none; cursor:pointer; background:linear-gradient(#ffd54a,#ffb300); color:#2a1d00; font-weight:800; padding:14px 18px; border-radius:10px; box-shadow:0 6px 0 #a67c00, 0 14px 24px rgba(0,0,0,.35); font-size:16px; letter-spacing:.3px; }
     button#pull:disabled{ opacity:.6; cursor:not-allowed; }
-
     .readout{ font-size:18px; color:var(--muted); flex:1; text-align:right; }
-    .result{ font-weight:800; color:#b7c9ff; }
-
     .answer-row{ margin-top:10px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
     .answer-row input{ width:160px; padding:12px 14px; border-radius:10px; border:1px solid #2a3a63; background:#0e1a33; color:var(--text); font-weight:700; font-size:18px; }
     .answer-row input:disabled{ opacity:.6 }
@@ -67,12 +38,10 @@
     .badge{ font-weight:900; padding:6px 10px; border-radius:999px; }
     .ok{ background:rgba(53,208,127,.15); border:1px solid rgba(53,208,127,.5); color:var(--good); }
     .no{ background:rgba(255,107,107,.12); border:1px solid rgba(255,107,107,.5); color:var(--bad); }
-
     /* Settings modal */
-    .modal-overlay{ position:fixed; inset:0; background:var(--overlay); display:none; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay{ position:fixed; inset:0; background:var(--overlay); display:none; align-items:center; justify-content:center; padding:20px; z-index:1000; }
     .modal-overlay.open{ display:flex; }
-    .modal{ width:min(680px, 96vw); background:#0e1a33; color:var(--text); border:1px solid #2a3a63; border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,.45);
-      padding:18px; }
+    .modal{ width:min(700px, 96vw); background:#0e1a33; color:var(--text); border:1px solid #2a3a63; border-radius:16px; box-shadow:0 24px 60px rgba(0,0,0,.45); padding:18px; }
     .modal h2{ margin:0 0 12px 0; font-size:20px; }
     .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .field{ display:flex; flex-direction:column; gap:6px; }
@@ -84,13 +53,7 @@
     .btn{ padding:10px 14px; border-radius:10px; border:1px solid #2a3a63; background:#1a2a4f; color:#dbe6ff; font-weight:800; cursor:pointer; }
     .btn.primary{ background:linear-gradient(#ffd54a,#ffb300); color:#2a1d00; border-color:#6b5600 }
     .hint{ font-size:12px; color:#9fb0d0 }
-
-    @media (max-width:560px){
-      .reel{ height:96px; font-size:60px } .reel.sign{ width:92px }
-      .readout{ width:100%; text-align:center; margin-top:8px } .controls{ justify-content:center }
-      .answer-row input{ width:130px }
-      .grid{ grid-template-columns:1fr }
-    }
+    @media (max-width:560px){ .reel{ height:96px; font-size:60px } .reel.sign{ width:92px } .readout{ width:100%; text-align:center; margin-top:8px } .controls{ justify-content:center } .answer-row input{ width:130px } .grid{ grid-template-columns:1fr } }
   </style>
 </head>
 <body>
@@ -98,9 +61,7 @@
     <div class="header">
       <h1 class="title">Math Slot Machine</h1>
       <button id="gear" class="gear-btn" aria-label="Open settings">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M19.14 12.94a7.952 7.952 0 0 0 .06-.94c0-.32-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.028 7.028 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.23-1.12.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.65 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.31.6.22l2.39-.96c.51.41 1.05.71 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.58-.23 1.12-.53 1.63-.94l2.39.96c.21.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94a7.952 7.952 0 0 0 .06-.94c0-.32-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.028 7.028 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54c-.58.23-1.12.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.65 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.31.6.22l2.39-.96c.51.41 1.05.71 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.58-.23 1.12-.53 1.63-.94l2.39.96c.21.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/></svg>
       </button>
     </div>
 
@@ -118,13 +79,13 @@
         <button id="pull" aria-label="Pull the lever (spacebar works too)">Pull Lever</button>
       </div>
       <div class="readout" id="readout">
-        Target range: <code id="rangeLabel">0–9</code> • Press <kbd>Space</kbd>
+        Ranges: <code id="rangeLabel">loading…</code> • Press <kbd>Space</kbd>
       </div>
     </div>
 
     <form class="answer-row" id="answerForm" autocomplete="off">
       <label for="answer" class="visually-hidden" style="position:absolute;left:-9999px;">Your answer</label>
-      <input id="answer" inputmode="numeric" pattern="[0-9\-]*" placeholder="Type answer…" disabled />
+      <input id="answer" inputmode="decimal" pattern="[0-9\-\.]*" placeholder="Type answer…" disabled />
       <button id="check" type="submit" disabled>Check</button>
       <span id="feedback" aria-live="polite"></span>
     </form>
@@ -135,8 +96,12 @@
     <div class="modal">
       <h2 id="settingsTitle">Settings</h2>
       <div class="grid">
-        <div class="field"><label for="min">Min value</label><input id="min" type="number" step="1" /></div>
-        <div class="field"><label for="max">Max value</label><input id="max" type="number" step="1" /></div>
+        <div class="field"><label for="min">Add/Sub min</label><input id="min" type="number" step="1" /></div>
+        <div class="field"><label for="max">Add/Sub max</label><input id="max" type="number" step="1" /></div>
+        <div class="field"><label for="mulMin">× min</label><input id="mulMin" type="number" step="1" /></div>
+        <div class="field"><label for="mulMax">× max</label><input id="mulMax" type="number" step="1" /></div>
+        <div class="field"><label for="divMin">÷ min</label><input id="divMin" type="number" step="1" /></div>
+        <div class="field"><label for="divMax">÷ max</label><input id="divMax" type="number" step="1" /></div>
         <div class="field"><label for="base">Base rounds</label><input id="base" type="number" step="1" min="0" /></div>
         <div class="field"><label for="var">Variance rounds</label><input id="var" type="number" step="1" min="0" /></div>
         <div class="field"><label for="durL">Left duration (ms)</label><input id="durL" type="number" step="50" min="100" /></div>
@@ -145,13 +110,14 @@
       </div>
       <div class="row">
         <label class="checkbox"><input id="tick" type="checkbox"/> Tick sound</label>
-        <label class="checkbox"><input id="nonneg" type="checkbox"/> No negative results</label>
-        <span class="hint">(swaps numbers if subtraction would go below 0)</span>
+        <label class="checkbox"><input id="nonneg" type="checkbox"/> No negative results (for −)</label>
       </div>
       <div class="row">
         <span>Allowed signs:</span>
         <label class="checkbox"><input id="plus" type="checkbox"/> +</label>
         <label class="checkbox"><input id="minus" type="checkbox"/> −</label>
+        <label class="checkbox"><input id="times" type="checkbox"/> ×</label>
+        <label class="checkbox"><input id="divide" type="checkbox"/> ÷</label>
       </div>
       <div class="actions">
         <button type="button" id="reset" class="btn">Reset to defaults</button>
@@ -166,26 +132,21 @@
   <script>
   // ===== SETTINGS (persisted) =====
   const DEFAULTS = {
-    min: 0,
-    max: 9,
-    baseRounds: 12,
-    varianceRounds: 8,
-    durLeft: 1600,
-    durSign: 1900,
-    durRight: 2200,
-    tick: false,
-    nonNegative: false,
-    signs: ['+','−']
+    min: 0, max: 9,
+    mulMin: 0, mulMax: 9,
+    divMin: 1, divMax: 9,
+    baseRounds: 12, varianceRounds: 8,
+    durLeft: 1600, durSign: 1900, durRight: 2200,
+    tick: false, nonNegative: false,
+    signs: ['+','−','×','÷']
   };
   const LS_KEY = 'math-slot-settings-v1';
-  function loadSettings(){
-    try{ const raw = localStorage.getItem(LS_KEY); if(!raw) return {...DEFAULTS};
-      const parsed = JSON.parse(raw);
-      return { ...DEFAULTS, ...parsed };
-    }catch{ return {...DEFAULTS}; }
-  }
+  function loadSettings(){ try{ const raw = localStorage.getItem(LS_KEY); if(!raw) return {...DEFAULTS}; const p = JSON.parse(raw); return { ...DEFAULTS, ...p }; }catch{ return {...DEFAULTS}; } }
   function saveSettings(s){ localStorage.setItem(LS_KEY, JSON.stringify(s)); }
   let settings = loadSettings();
+
+  // Global order for the sign reel
+  const SIGNS_ORDER = ['+','−','×','÷'];
 
   // ===== ELEMENTS =====
   const leftEl = document.querySelector('#left span');
@@ -204,6 +165,10 @@
   const gearBtn = document.getElementById('gear');
   const minInp = document.getElementById('min');
   const maxInp = document.getElementById('max');
+  const mulMinInp = document.getElementById('mulMin');
+  const mulMaxInp = document.getElementById('mulMax');
+  const divMinInp = document.getElementById('divMin');
+  const divMaxInp = document.getElementById('divMax');
   const baseInp = document.getElementById('base');
   const varInp = document.getElementById('var');
   const durLInp = document.getElementById('durL');
@@ -213,11 +178,16 @@
   const nonnegInp = document.getElementById('nonneg');
   const plusInp = document.getElementById('plus');
   const minusInp = document.getElementById('minus');
+  const timesInp = document.getElementById('times');
+  const divideInp = document.getElementById('divide');
   const saveBtn = document.getElementById('save');
   const closeBtn = document.getElementById('close');
   const resetBtn = document.getElementById('reset');
 
-  rangeLabel.textContent = `${settings.min}–${settings.max}`;
+  function setRangeLabel(){
+    rangeLabel.textContent = `+/−: ${settings.min}–${settings.max} • ×: ${settings.mulMin}–${settings.mulMax} • ÷: ${settings.divMin}–${settings.divMax}`;
+  }
+  setRangeLabel();
 
   let isSpinning = false;
   let currentOutcome = null; // {a,b,sign,result}
@@ -234,7 +204,6 @@
 
   // ===== ANIMATION =====
   function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
-
   function spinReel({element, items, duration, targetIndex}){
     return new Promise(resolve=>{
       const n = items.length;
@@ -242,146 +211,130 @@
       const loops = settings.baseRounds + Math.floor(Math.random()*settings.varianceRounds);
       const totalSteps = loops*n + ((targetIndex - startIndex + n) % n);
       let lastStep = -1; let start = null;
-
       function frame(ts){
         if(!start) start = ts;
         const t = Math.min(1, (ts-start)/duration);
         const eased = easeOutCubic(t);
         const step = Math.floor(eased * totalSteps);
-        if(step !== lastStep){
-          const index = (startIndex + step) % n;
-          element.textContent = items[index];
-          tick();
-          lastStep = step;
-        }
-        if(t < 1){ requestAnimationFrame(frame); }
-        else { element.textContent = items[targetIndex]; resolve(); }
+        if(step !== lastStep){ const index = (startIndex + step) % n; element.textContent = items[index]; tick(); lastStep = step; }
+        if(t < 1){ requestAnimationFrame(frame); } else { element.textContent = items[targetIndex]; resolve(); }
       }
       requestAnimationFrame(frame);
     });
   }
 
   function randomInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-  function getDigits(){
-    const count = settings.max - settings.min + 1;
-    return Array.from({length: count}, (_,i)=> String(i + settings.min));
-  }
+  function getDigitsFor(min, max){ const count = max - min + 1; return Array.from({length: count}, (_,i)=> String(i + min)); }
   function getSigns(){ return settings.signs.slice(); }
 
-  // UI helpers
-  function setAnswerEnabled(enabled){
-    answerInput.disabled = !enabled;
-    checkBtn.disabled = !enabled;
-    if(enabled){ answerInput.focus(); answerInput.select?.(); }
-  }
-  function clearFeedback(){ feedback.textContent=''; feedback.className=''; }
-
+  // ===== GAME FLOW =====
   async function pull(){
     if(isSpinning) return;
-    isSpinning = true;
-    pullBtn.disabled = true;
-    setAnswerEnabled(false);
-    clearFeedback();
+    isSpinning = true; pullBtn.disabled = true; setAnswerEnabled(false); feedback.textContent='';
     readout.innerHTML = `Reels spinning… guess after they stop!`;
+    leverEl.classList.add('is-pulled'); setTimeout(()=>leverEl.classList.remove('is-pulled'), 220);
 
-    leverEl.classList.add('is-pulled');
-    setTimeout(()=>leverEl.classList.remove('is-pulled'), 220);
-
-    const digits = getDigits();
-    let a = randomInt(settings.min, settings.max);
-    let b = randomInt(settings.min, settings.max);
     const signs = getSigns();
-    // Ensure at least one sign exists
     const sign = signs.length ? signs[Math.floor(Math.random()*signs.length)] : '+';
 
-    if(settings.nonNegative && sign === '−' && b > a){ const t=a; a=b; b=t; }
+    let rngMin = settings.min, rngMax = settings.max;
+    if(sign === '×'){ rngMin = settings.mulMin; rngMax = settings.mulMax; }
+    if(sign === '÷'){ rngMin = settings.divMin; rngMax = settings.divMax; }
 
-    const leftTargetIndex  = digits.indexOf(String(a));
-    const rightTargetIndex = digits.indexOf(String(b));
-    const signTargetIndex  = ['+','−'].indexOf(sign); // items array for sign reel is fixed order
+    let a = randomInt(rngMin, rngMax);
+    let b = randomInt(rngMin, rngMax);
+
+    if(settings.nonNegative && sign === '−' && b > a){ const t=a; a=b; b=t; }
+    if(sign === '÷' && b === 0){ b = 1; }
+
+    const leftItems  = getDigitsFor(rngMin, rngMax);
+    const rightItems = getDigitsFor(rngMin, rngMax);
+    const leftTargetIndex  = leftItems.indexOf(String(a));
+    const rightTargetIndex = rightItems.indexOf(String(b));
+    const signTargetIndex  = SIGNS_ORDER.indexOf(sign);
 
     await Promise.all([
-      spinReel({element:leftEl,  items:digits,          duration:settings.durLeft,  targetIndex:leftTargetIndex}),
-      spinReel({element:signEl,  items:['+','−'],       duration:settings.durSign,  targetIndex:signTargetIndex}),
-      spinReel({element:rightEl, items:digits,          duration:settings.durRight, targetIndex:rightTargetIndex})
+      spinReel({element:leftEl,  items:leftItems,  duration:settings.durLeft,  targetIndex:leftTargetIndex}),
+      spinReel({element:signEl,  items:SIGNS_ORDER, duration:settings.durSign,  targetIndex:signTargetIndex}),
+      spinReel({element:rightEl, items:rightItems, duration:settings.durRight, targetIndex:rightTargetIndex})
     ]);
 
-    const result = sign === '+' ? (a + b) : (a - b);
+    let result;
+    switch (sign) {
+      case '+': result = a + b; break;
+      case '−': result = a - b; break;
+      case '×': result = a * b; break;
+      case '÷': result = b !== 0 ? (a / b) : Infinity; break;
+      default:  result = a + b;
+    }
     currentOutcome = { a, b, sign, result };
 
     readout.innerHTML = `Type your answer and press <kbd>Enter</kbd> or click <strong>Check</strong>.`;
-    answerInput.value = '';
-    setAnswerEnabled(true);
-    isSpinning = false;
-    pullBtn.disabled = false;
+    answerInput.value = ''; setAnswerEnabled(true); isSpinning = false; pullBtn.disabled = false;
   }
 
-  // Submit handler
-  form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    if(!currentOutcome) return;
-    const raw = answerInput.value.trim();
-    if(raw === ''){ feedback.innerHTML = `<span class="badge no">Enter a number</span>`; return; }
-    const guess = Number(raw);
-    if(Number.isNaN(guess)){ feedback.innerHTML = `<span class="badge no">That’s not a number</span>`; return; }
+  function setAnswerEnabled(enabled){ answerInput.disabled = !enabled; checkBtn.disabled = !enabled; if(enabled){ answerInput.focus(); answerInput.select?.(); } }
 
-    const {a,b,sign,result} = currentOutcome;
-    const correct = (guess === result);
-    if(correct){
-      feedback.innerHTML = `<span class="badge ok">Correct!</span> &nbsp; <strong>${a} ${sign} ${b} = ${result}</strong>`;
-    } else {
-      feedback.innerHTML = `<span class="badge no">Not quite</span> &nbsp; <strong>${a} ${sign} ${b} = ${result}</strong> &nbsp; (you entered ${guess})`;
-    }
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault(); if(!currentOutcome) return;
+    const raw = answerInput.value.trim(); if(raw === ''){ feedback.innerHTML = `<span class="badge no">Enter a number</span>`; return; }
+    const guess = Number(raw); if(Number.isNaN(guess)){ feedback.innerHTML = `<span class="badge no">That’s not a number</span>`; return; }
+    const {a,b,sign,result} = currentOutcome; const correct = (guess === result);
+    if(correct){ feedback.innerHTML = `<span class="badge ok">Correct!</span> &nbsp; <strong>${a} ${sign} ${b} = ${result}</strong>`; }
+    else { feedback.innerHTML = `<span class="badge no">Not quite</span> &nbsp; <strong>${a} ${sign} ${b} = ${result}</strong> &nbsp; (you entered ${guess})`; }
   });
 
   pullBtn.addEventListener('click', pull);
   window.addEventListener('keydown', (e)=>{ if(e.code === 'Space'){ e.preventDefault(); pull(); } });
 
-  // ===== SETTINGS MODAL LOGIC =====
+  // ===== SETTINGS MODAL =====
   function openModal(){
-    // Fill inputs from current settings
     minInp.value = settings.min; maxInp.value = settings.max;
+    mulMinInp.value = settings.mulMin; mulMaxInp.value = settings.mulMax;
+    divMinInp.value = settings.divMin; divMaxInp.value = settings.divMax;
     baseInp.value = settings.baseRounds; varInp.value = settings.varianceRounds;
     durLInp.value = settings.durLeft; durSInp.value = settings.durSign; durRInp.value = settings.durRight;
     tickInp.checked = settings.tick; nonnegInp.checked = settings.nonNegative;
     plusInp.checked = settings.signs.includes('+');
     minusInp.checked = settings.signs.includes('−');
+    timesInp.checked = settings.signs.includes('×');
+    divideInp.checked = settings.signs.includes('÷');
     modal.classList.add('open');
   }
   function closeModal(){ modal.classList.remove('open'); }
-
   function parseIntSafe(v, def){ const n = parseInt(v, 10); return Number.isFinite(n) ? n : def; }
 
   function handleSave(){
     const next = { ...settings };
     next.min = parseIntSafe(minInp.value, settings.min);
     next.max = parseIntSafe(maxInp.value, settings.max);
-    if(next.max < next.min){ // clamp
-      const t = next.min; next.min = next.max; next.max = t;
-    }
+    if(next.max < next.min){ const t = next.min; next.min = next.max; next.max = t; }
+    next.mulMin = parseIntSafe(mulMinInp.value, settings.mulMin);
+    next.mulMax = parseIntSafe(mulMaxInp.value, settings.mulMax);
+    if(next.mulMax < next.mulMin){ const t = next.mulMin; next.mulMin = next.mulMax; next.mulMax = t; }
+    next.divMin = parseIntSafe(divMinInp.value, settings.divMin);
+    next.divMax = parseIntSafe(divMaxInp.value, settings.divMax);
+    if(next.divMax < next.divMin){ const t = next.divMin; next.divMin = next.divMax; next.divMax = t; }
     next.baseRounds = Math.max(0, parseIntSafe(baseInp.value, settings.baseRounds));
     next.varianceRounds = Math.max(0, parseIntSafe(varInp.value, settings.varianceRounds));
     next.durLeft = Math.max(100, parseIntSafe(durLInp.value, settings.durLeft));
     next.durSign = Math.max(100, parseIntSafe(durSInp.value, settings.durSign));
     next.durRight = Math.max(100, parseIntSafe(durRInp.value, settings.durRight));
-    next.tick = !!tickInp.checked;
-    next.nonNegative = !!nonnegInp.checked;
+    next.tick = !!tickInp.checked; next.nonNegative = !!nonnegInp.checked;
     const selectedSigns = [];
     if(plusInp.checked) selectedSigns.push('+');
     if(minusInp.checked) selectedSigns.push('−');
+    if(timesInp.checked) selectedSigns.push('×');
+    if(divideInp.checked) selectedSigns.push('÷');
     if(selectedSigns.length === 0) selectedSigns.push('+');
     next.signs = selectedSigns;
-
-    settings = next;
-    saveSettings(settings);
-    rangeLabel.textContent = `${settings.min}–${settings.max}`;
-    closeModal();
+    settings = next; saveSettings(settings); setRangeLabel(); closeModal();
   }
 
-  gearBtn.addEventListener('click', openModal);
-  document.getElementById('save').addEventListener('click', handleSave);
-  document.getElementById('close').addEventListener('click', closeModal);
-  resetBtn.addEventListener('click', ()=>{ settings = {...DEFAULTS}; saveSettings(settings); handleSave(); });
+  if(gearBtn) gearBtn.addEventListener('click', openModal);
+  if(saveBtn) saveBtn.addEventListener('click', handleSave);
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(resetBtn) resetBtn.addEventListener('click', ()=>{ settings = { ...DEFAULTS }; saveSettings(settings); setRangeLabel(); closeModal(); });
   modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
   window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
@@ -389,10 +342,6 @@
   leftEl.textContent = String(settings.min);
   rightEl.textContent = String(settings.min);
   signEl.textContent = '+';
-  function setAnswerEnabled(enabled){
-    answerInput.disabled = !enabled;
-    checkBtn.disabled = !enabled;
-  }
   setAnswerEnabled(false);
   </script>
 </body>
